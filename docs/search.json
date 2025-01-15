@@ -14,17 +14,52 @@
     "text": "This is the first post in a Quarto blog. Welcome!\n\nSince this post doesn’t specify an explicit image, the first image in the post will be used in the listing page of posts.\nJessie was here"
   },
   {
-    "objectID": "posts/post-with-code/index.html",
-    "href": "posts/post-with-code/index.html",
-    "title": "Post With Code",
+    "objectID": "posts/Vancouver_tree _geo_analysis/index.html",
+    "href": "posts/Vancouver_tree _geo_analysis/index.html",
+    "title": "Vancouver Tree Height Geography Analysis",
     "section": "",
-    "text": "This is a post with executable code."
+    "text": "Urban trees are the unsung champions of city life, providing benefits that go far beyond aesthetics. They improve air quality, offer shade, reduce urban heat, and promote biodiversity. In Vancouver, a city known for its commitment to sustainability, urban forestry plays a vital role in shaping livable and equitable spaces. But have you ever wondered if trees in Vancouver differ across neighborhoods? Could tree height—a seemingly simple characteristic—reveal something deeper about urban planning, environmental factors, or neighborhood priorities?\nOur team delved into this question using data from the City of Vancouver Open Data Portal, analyzing tree heights across neighborhoods. Our findings not only revealed significant disparities but also pointed to opportunities for improving urban forestry practices across the city."
+  },
+  {
+    "objectID": "posts/Vancouver_tree _geo_analysis/index.html#do-tree-heights-vary-across-vancouvers-neighborhoods",
+    "href": "posts/Vancouver_tree _geo_analysis/index.html#do-tree-heights-vary-across-vancouvers-neighborhoods",
+    "title": "Vancouver Tree Height Geography Analysis",
+    "section": "",
+    "text": "Urban trees are the unsung champions of city life, providing benefits that go far beyond aesthetics. They improve air quality, offer shade, reduce urban heat, and promote biodiversity. In Vancouver, a city known for its commitment to sustainability, urban forestry plays a vital role in shaping livable and equitable spaces. But have you ever wondered if trees in Vancouver differ across neighborhoods? Could tree height—a seemingly simple characteristic—reveal something deeper about urban planning, environmental factors, or neighborhood priorities?\nOur team delved into this question using data from the City of Vancouver Open Data Portal, analyzing tree heights across neighborhoods. Our findings not only revealed significant disparities but also pointed to opportunities for improving urban forestry practices across the city."
+  },
+  {
+    "objectID": "posts/Vancouver_tree _geo_analysis/index.html#why-tree-heights-matter",
+    "href": "posts/Vancouver_tree _geo_analysis/index.html#why-tree-heights-matter",
+    "title": "Vancouver Tree Height Geography Analysis",
+    "section": "Why Tree Heights Matter",
+    "text": "Why Tree Heights Matter\nTree height is more than just a visual characteristic—it serves as an indicator of broader environmental and urban conditions. Taller trees provide numerous ecological benefits: they offer greater shade, absorb more carbon dioxide, and cool the surrounding environment more effectively. These features are particularly important in densely populated urban areas where heat islands and air pollution pose significant challenges.\nShorter trees, while valuable, often reflect challenges such as poor soil quality, limited planting space, or inadequate tree management. By studying the distribution of tree heights across neighborhoods, we aimed to uncover patterns that could inform better city planning, equitable green space distribution, and targeted reforestation efforts."
+  },
+  {
+    "objectID": "posts/Vancouver_tree _geo_analysis/index.html#how-we-conducted-our-analysis",
+    "href": "posts/Vancouver_tree _geo_analysis/index.html#how-we-conducted-our-analysis",
+    "title": "Vancouver Tree Height Geography Analysis",
+    "section": "How We Conducted Our Analysis",
+    "text": "How We Conducted Our Analysis\nOur study followed a systematic approach to uncover insights from the tree height data. Here’s how we proceeded:\n\nExploring the Data\n\nWe began by visualizing tree height distributions across Vancouver neighborhoods. Using heatmaps and other visual tools, we grouped trees into height categories (e.g., 10–20 feet, 20–30 feet) and examined how they were distributed across neighborhoods. This initial exploration revealed clear patterns: Downtown and Shaughnessy, for example, had a higher proportion of tall trees, while Renfrew-Collingwood and Victoria-Fraserview were dominated by shorter ones.\nThese differences were striking, but visualizations alone couldn’t confirm if they were statistically significant. Were these disparities meaningful, or could they simply be due to random chance?\n\nTesting the Hypotheses\n\nTo answer this, we used a statistical method called hypothesis testing, specifically the Chi-squared test. This test evaluates whether two categorical variables—in our case, tree height and neighborhood—are independent or related.\nWe framed our hypotheses as follows: • Null Hypothesis: Tree height does not vary by neighborhood. • Alternative Hypothesis: Tree height varies by neighborhood.\nThe Chi-squared test produced a very small p-value (essentially zero), meaning the probability of observing these differences by chance was extremely low. This confirmed that tree height distribution is, in fact, influenced by neighborhood."
+  },
+  {
+    "objectID": "posts/Vancouver_tree _geo_analysis/index.html#key-findings-uneven-tree-heights-across-vancouver",
+    "href": "posts/Vancouver_tree _geo_analysis/index.html#key-findings-uneven-tree-heights-across-vancouver",
+    "title": "Vancouver Tree Height Geography Analysis",
+    "section": "Key Findings: Uneven Tree Heights Across Vancouver",
+    "text": "Key Findings: Uneven Tree Heights Across Vancouver\nOur analysis revealed significant variations in tree heights across neighborhoods. Here are some highlights: • Tall Trees Dominate Downtown and Shaughnessy: These neighborhoods, known for their spacious layouts and higher levels of urban investment, had a greater proportion of tall trees. This could reflect better tree maintenance practices, favorable soil conditions, or larger planting spaces. • Shorter Trees in Renfrew-Collingwood and Victoria-Fraserview: These areas had a higher concentration of shorter trees, which may be due to limited green spaces, compact urban layouts, or soil constraints.\nThese findings reveal disparities in the ecological benefits provided by urban greenery. Neighborhoods with more tall trees enjoy greater shade, cooling effects, and air purification, while areas with shorter trees may miss out on these critical benefits."
+  },
+  {
+    "objectID": "posts/Vancouver_tree _geo_analysis/index.html#what-do-these-findings-mean",
+    "href": "posts/Vancouver_tree _geo_analysis/index.html#what-do-these-findings-mean",
+    "title": "Vancouver Tree Height Geography Analysis",
+    "section": "What Do These Findings Mean?",
+    "text": "What Do These Findings Mean?\nThe variation in tree heights points to broader disparities in urban greenery benefits. Trees are not distributed equally across Vancouver’s neighborhoods, and this has real implications for residents’ quality of life. Tall trees, for example, can significantly reduce summer temperatures, making streets and parks more comfortable during heatwaves. They also absorb more pollution and contribute to better air quality, particularly important in areas with high traffic or industrial activity.\nOur findings highlight the need for targeted interventions to ensure all neighborhoods benefit from the ecological advantages of tall trees. By addressing disparities in tree height distribution, Vancouver can take an important step toward creating a more equitable urban environment."
   },
   {
     "objectID": "index.html",
     "href": "index.html",
     "title": "Jessie’s Blog",
     "section": "",
-    "text": "Post With Code\n\n\n\n\n\n\nnews\n\n\ncode\n\n\nanalysis\n\n\n\n\n\n\n\n\n\nJan 15, 2025\n\n\nHarlow Malloc\n\n\n\n\n\n\n\n\n\n\n\n\nWelcome To My Blog\n\n\n\n\n\n\nnews\n\n\n\n\n\n\n\n\n\nJan 12, 2025\n\n\nTristan O’Malley\n\n\n\n\n\n\nNo matching items"
+    "text": "Vancouver Tree Height Geography Analysis\n\n\n\n\n\n\nnews\n\n\ncode\n\n\nanalysis\n\n\n\n\n\n\n\n\n\nJan 15, 2025\n\n\nJessie Zhang\n\n\n\n\n\n\n\n\n\n\n\n\nWelcome To My Blog\n\n\n\n\n\n\nnews\n\n\n\n\n\n\n\n\n\nJan 12, 2025\n\n\nTristan O’Malley\n\n\n\n\n\n\nNo matching items"
   }
 ]

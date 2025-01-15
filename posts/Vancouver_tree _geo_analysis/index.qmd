@@ -1,0 +1,53 @@
+---
+title: "Vancouver Tree Height Geography Analysis"
+author: "Jessie Zhang"
+date: "2025-01-15"
+categories: [news, code, analysis]
+---
+
+## Do Tree Heights Vary Across Vancouver’s Neighborhoods?
+
+![](tree.jpg){style="float: right; margin-left: 10px; width: 200px"}
+Urban trees are the unsung champions of city life, providing benefits that go far beyond aesthetics. They improve air quality, offer shade, reduce urban heat, and promote biodiversity. In Vancouver, a city known for its commitment to sustainability, urban forestry plays a vital role in shaping livable and equitable spaces. But have you ever wondered if trees in Vancouver differ across neighborhoods? Could tree height—a seemingly simple characteristic—reveal something deeper about urban planning, environmental factors, or neighborhood priorities?
+
+Our team delved into this question using data from the City of Vancouver Open Data Portal, analyzing tree heights across neighborhoods. Our findings not only revealed significant disparities but also pointed to opportunities for improving urban forestry practices across the city.
+
+## Why Tree Heights Matter
+
+Tree height is more than just a visual characteristic—it serves as an indicator of broader environmental and urban conditions. Taller trees provide numerous ecological benefits: they offer greater shade, absorb more carbon dioxide, and cool the surrounding environment more effectively. These features are particularly important in densely populated urban areas where heat islands and air pollution pose significant challenges.
+
+Shorter trees, while valuable, often reflect challenges such as poor soil quality, limited planting space, or inadequate tree management. By studying the distribution of tree heights across neighborhoods, we aimed to uncover patterns that could inform better city planning, equitable green space distribution, and targeted reforestation efforts.
+
+## How We Conducted Our Analysis
+
+Our study followed a systematic approach to uncover insights from the tree height data. Here’s how we proceeded:
+
+1. Exploring the Data
+
+We began by visualizing tree height distributions across Vancouver neighborhoods. Using heatmaps and other visual tools, we grouped trees into height categories (e.g., 10–20 feet, 20–30 feet) and examined how they were distributed across neighborhoods. This initial exploration revealed clear patterns: Downtown and Shaughnessy, for example, had a higher proportion of tall trees, while Renfrew-Collingwood and Victoria-Fraserview were dominated by shorter ones.
+
+These differences were striking, but visualizations alone couldn’t confirm if they were statistically significant. Were these disparities meaningful, or could they simply be due to random chance?
+
+2. Testing the Hypotheses
+
+To answer this, we used a statistical method called hypothesis testing, specifically the Chi-squared test. This test evaluates whether two categorical variables—in our case, tree height and neighborhood—are independent or related.
+
+We framed our hypotheses as follows:
+	•	Null Hypothesis: Tree height does not vary by neighborhood.
+	•	Alternative Hypothesis: Tree height varies by neighborhood.
+
+The Chi-squared test produced a very small p-value (essentially zero), meaning the probability of observing these differences by chance was extremely low. This confirmed that tree height distribution is, in fact, influenced by neighborhood.
+
+## Key Findings: Uneven Tree Heights Across Vancouver
+
+Our analysis revealed significant variations in tree heights across neighborhoods. Here are some highlights:
+	•	Tall Trees Dominate Downtown and Shaughnessy: These neighborhoods, known for their spacious layouts and higher levels of urban investment, had a greater proportion of tall trees. This could reflect better tree maintenance practices, favorable soil conditions, or larger planting spaces.
+	•	Shorter Trees in Renfrew-Collingwood and Victoria-Fraserview: These areas had a higher concentration of shorter trees, which may be due to limited green spaces, compact urban layouts, or soil constraints.
+
+These findings reveal disparities in the ecological benefits provided by urban greenery. Neighborhoods with more tall trees enjoy greater shade, cooling effects, and air purification, while areas with shorter trees may miss out on these critical benefits.
+
+## What Do These Findings Mean?
+
+The variation in tree heights points to broader disparities in urban greenery benefits. Trees are not distributed equally across Vancouver’s neighborhoods, and this has real implications for residents’ quality of life. Tall trees, for example, can significantly reduce summer temperatures, making streets and parks more comfortable during heatwaves. They also absorb more pollution and contribute to better air quality, particularly important in areas with high traffic or industrial activity.
+
+Our findings highlight the need for targeted interventions to ensure all neighborhoods benefit from the ecological advantages of tall trees. By addressing disparities in tree height distribution, Vancouver can take an important step toward creating a more equitable urban environment.
