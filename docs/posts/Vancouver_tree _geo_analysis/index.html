@@ -9,7 +9,7 @@
 <meta name="author" content="Jessie Zhang">
 <meta name="dcterms.date" content="2025-01-15">
 
-<title>Vancouver Tree Height Geography Analysis – Jessie’s Blog</title>
+<title>A Practical Guide to EDA: Analyzing Vancouver’s Tree Heights – Jessie’s Blog</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -116,10 +116,9 @@ ul.task-list li input[type="checkbox"] {
 <header id="title-block-header" class="quarto-title-block default page-columns page-full">
   <div class="quarto-title-banner page-columns page-full">
     <div class="quarto-title column-body">
-      <h1 class="title">Vancouver Tree Height Geography Analysis</h1>
+      <h1 class="title">A Practical Guide to EDA: Analyzing Vancouver’s Tree Heights</h1>
                                 <div class="quarto-categories">
-                <div class="quarto-category">news</div>
-                <div class="quarto-category">code</div>
+                <div class="quarto-category">Data Science</div>
                 <div class="quarto-category">analysis</div>
               </div>
                   </div>
@@ -157,40 +156,91 @@ ul.task-list li input[type="checkbox"] {
 
 
 
-<section id="do-tree-heights-vary-across-vancouvers-neighborhoods" class="level2">
-<h2 class="anchored" data-anchor-id="do-tree-heights-vary-across-vancouvers-neighborhoods">Do Tree Heights Vary Across Vancouver’s Neighborhoods?</h2>
-<p><img src="tree.jpg" class="img-fluid" style="float: right; margin-left: 10px; width: 200px"> Urban trees are the unsung champions of city life, providing benefits that go far beyond aesthetics. They improve air quality, offer shade, reduce urban heat, and promote biodiversity. In Vancouver, a city known for its commitment to sustainability, urban forestry plays a vital role in shaping livable and equitable spaces. But have you ever wondered if trees in Vancouver differ across neighborhoods? Could tree height—a seemingly simple characteristic—reveal something deeper about urban planning, environmental factors, or neighborhood priorities?</p>
-<p>Our team delved into this question using data from the City of Vancouver Open Data Portal, analyzing tree heights across neighborhoods. Our findings not only revealed significant disparities but also pointed to opportunities for improving urban forestry practices across the city.</p>
+<p>If you’re aspiring to be a data scientist or analyst, Exploratory Data Analysis (EDA) is one of the most critical steps in any project you will encounter. Think of EDA as the foundation of your analysis, it’s where you familiarize yourself with your data, uncover patterns, and set the stage for meaningful insights. Skipping this step or performing it poorly can lead to misguided conclusions and wasted efforts.</p>
+<p>In this blog, let’s dive into how to implement EDA effectively using an example from a project about <a href="https://ubc-mds.github.io/vancouver-tree-height-geo-group-33/report/vancouver-tree-height-geo.html">Vancouver Tree Height Geography Analysis</a>, where we explored variations in tree heights across the city’s neighborhoods. Whether you’re analyzing trees, customer behavior, or healthcare data, the lessons from this project apply universally to all aspiring data scientists.</p>
+<section id="what-is-eda-and-why-is-it-important" class="level2">
+<h2 class="anchored" data-anchor-id="what-is-eda-and-why-is-it-important">What Is EDA and Why Is It Important?</h2>
+<p><img src="tree.jpg" class="img-fluid" style="float: right; margin-left: 10px; width: 200px" alt="Tree"> Exploratory Data Analysis (EDA) is a critical step in any data science workflow. It’s where you familiarize yourself with your data, uncover patterns, and set the stage for meaningful insights. Skipping this step or performing it poorly can lead to misguided conclusions and wasted efforts.</p>
+<p>EDA helps you:<br>
+- <strong>Understand Your Dataset</strong>: Learn about the structure, quality, and key features of your data.<br>
+- <strong>Spot Trends and Anomalies</strong>: Identify patterns, clusters, or unexpected values that may require attention.<br>
+- <strong>Shape Your Analysis</strong>: Refine your questions and determine the most promising directions for further exploration.</p>
+<p>In our Vancouver Tree Project, EDA allowed us to explore tree height distributions across neighborhoods and informed our approach to testing whether these variations were significant.</p>
 </section>
-<section id="why-tree-heights-matter" class="level2">
-<h2 class="anchored" data-anchor-id="why-tree-heights-matter">Why Tree Heights Matter</h2>
-<p>Tree height is more than just a visual characteristic—it serves as an indicator of broader environmental and urban conditions. Taller trees provide numerous ecological benefits: they offer greater shade, absorb more carbon dioxide, and cool the surrounding environment more effectively. These features are particularly important in densely populated urban areas where heat islands and air pollution pose significant challenges.</p>
-<p>Shorter trees, while valuable, often reflect challenges such as poor soil quality, limited planting space, or inadequate tree management. By studying the distribution of tree heights across neighborhoods, we aimed to uncover patterns that could inform better city planning, equitable green space distribution, and targeted reforestation efforts.</p>
+<section id="steps-for-effective-eda" class="level2">
+<h2 class="anchored" data-anchor-id="steps-for-effective-eda">Steps for Effective EDA</h2>
+<section id="start-with-a-clear-objective" class="level3">
+<h3 class="anchored" data-anchor-id="start-with-a-clear-objective">1. Start with a Clear Objective</h3>
+<p>Every great EDA begins with a specific question or goal. For our project, the question was: <em>Do tree heights vary across neighborhoods in Vancouver?</em> This focus ensured our analysis was targeted and relevant.</p>
+<p><strong>Pro Tip</strong>: Define your objective early and use it as a guide throughout the EDA process. This prevents you from getting sidetracked by unrelated patterns.</p>
 </section>
-<section id="how-we-conducted-our-analysis" class="level2">
-<h2 class="anchored" data-anchor-id="how-we-conducted-our-analysis">How We Conducted Our Analysis</h2>
-<p>Our study followed a systematic approach to uncover insights from the tree height data. Here’s how we proceeded:</p>
-<ol type="1">
-<li>Exploring the Data</li>
-</ol>
-<p>We began by visualizing tree height distributions across Vancouver neighborhoods. Using heatmaps and other visual tools, we grouped trees into height categories (e.g., 10–20 feet, 20–30 feet) and examined how they were distributed across neighborhoods. This initial exploration revealed clear patterns: Downtown and Shaughnessy, for example, had a higher proportion of tall trees, while Renfrew-Collingwood and Victoria-Fraserview were dominated by shorter ones.</p>
-<p>These differences were striking, but visualizations alone couldn’t confirm if they were statistically significant. Were these disparities meaningful, or could they simply be due to random chance?</p>
-<ol start="2" type="1">
-<li>Testing the Hypotheses</li>
-</ol>
-<p>To answer this, we used a statistical method called hypothesis testing, specifically the Chi-squared test. This test evaluates whether two categorical variables—in our case, tree height and neighborhood—are independent or related.</p>
-<p>We framed our hypotheses as follows: • Null Hypothesis: Tree height does not vary by neighborhood. • Alternative Hypothesis: Tree height varies by neighborhood.</p>
-<p>The Chi-squared test produced a very small p-value (essentially zero), meaning the probability of observing these differences by chance was extremely low. This confirmed that tree height distribution is, in fact, influenced by neighborhood.</p>
+<section id="load-and-inspect-your-data" class="level3">
+<h3 class="anchored" data-anchor-id="load-and-inspect-your-data">2. Load and Inspect Your Data</h3>
+<p>Before analyzing anything, start by understanding the structure and quality of your dataset. For our project, the data included tree height categories, neighborhood names, and other details. Here’s what we did:<br>
+- <strong>Check Data Structure</strong>: How many rows and columns are there? What are the variable types?<br>
+- <strong>Identify Missing Values</strong>: Are there gaps in the data that need attention?<br>
+- <strong>Preview the Data</strong>: Use simple commands like <code>head()</code> or <code>summary()</code> in R or Python to get a quick snapshot.</p>
+<p>For example, we discovered inconsistent capitalization in neighborhood names, which needed to be standardized before further analysis.</p>
+<p><strong>Key Takeaway</strong>: Understanding your data early saves time and helps you spot potential issues before they become major obstacles.</p>
 </section>
-<section id="key-findings-uneven-tree-heights-across-vancouver" class="level2">
-<h2 class="anchored" data-anchor-id="key-findings-uneven-tree-heights-across-vancouver">Key Findings: Uneven Tree Heights Across Vancouver</h2>
-<p>Our analysis revealed significant variations in tree heights across neighborhoods. Here are some highlights: • Tall Trees Dominate Downtown and Shaughnessy: These neighborhoods, known for their spacious layouts and higher levels of urban investment, had a greater proportion of tall trees. This could reflect better tree maintenance practices, favorable soil conditions, or larger planting spaces. • Shorter Trees in Renfrew-Collingwood and Victoria-Fraserview: These areas had a higher concentration of shorter trees, which may be due to limited green spaces, compact urban layouts, or soil constraints.</p>
-<p>These findings reveal disparities in the ecological benefits provided by urban greenery. Neighborhoods with more tall trees enjoy greater shade, cooling effects, and air purification, while areas with shorter trees may miss out on these critical benefits.</p>
+<section id="clean-the-data" class="level3">
+<h3 class="anchored" data-anchor-id="clean-the-data">3. Clean the Data</h3>
+<p>Dirty data is the enemy of meaningful analysis. In our Vancouver project, we cleaned the data by: - <strong>Standardizing Formats</strong>: Ensuring consistent capitalization for neighborhood names to avoid grouping errors. - <strong>Handling Missing Data</strong>: Excluding neighborhoods with incomplete tree height data to maintain accuracy. - <strong>Removing Duplicates</strong>: Eliminating repeated entries to prevent bias in the analysis.</p>
+<p><strong>Pro Tip</strong>: Data cleaning might not be glamorous, but it’s critical. Invest time in this step to ensure your analysis is accurate and reliable.</p>
 </section>
-<section id="what-do-these-findings-mean" class="level2">
-<h2 class="anchored" data-anchor-id="what-do-these-findings-mean">What Do These Findings Mean?</h2>
-<p>The variation in tree heights points to broader disparities in urban greenery benefits. Trees are not distributed equally across Vancouver’s neighborhoods, and this has real implications for residents’ quality of life. Tall trees, for example, can significantly reduce summer temperatures, making streets and parks more comfortable during heatwaves. They also absorb more pollution and contribute to better air quality, particularly important in areas with high traffic or industrial activity.</p>
-<p>Our findings highlight the need for targeted interventions to ensure all neighborhoods benefit from the ecological advantages of tall trees. By addressing disparities in tree height distribution, Vancouver can take an important step toward creating a more equitable urban environment.</p>
+<section id="use-visualizations-to-uncover-patterns" class="level3">
+<h3 class="anchored" data-anchor-id="use-visualizations-to-uncover-patterns">4. Use Visualizations to Uncover Patterns</h3>
+<p>Visualization is one of the most powerful tools in EDA. It allows you to see trends, anomalies, and relationships that might not be obvious in raw data. In our project, we used:<br>
+- <strong>Bar Charts</strong>: To compare tree height distributions across neighborhoods.<br>
+- <strong>Heatmaps</strong>: To visualize variations in average tree height across the city spatially.<br>
+<img src="heatmap.png" id="fig-heatmap" class="img-fluid" style="width:90.0%" alt="Heatmap of Tree Height Distribution by Neighbourhood"><br>
+- <strong>More</strong>: To further improve our plots, we could actually combine area map and heatmaps to make them more appealing.<br>
+<img src="map_by_height.png" id="fig-heatmap" class="img-fluid" style="width:90.0%" alt="Map of Tree Height Distribution by Neighbourhood"></p>
+<p>For example, we observed that neighborhoods like Downtown and Shaughnessy had taller trees, while Victoria-Fraserview and Renfrew-Collingwood were dominated by shorter ones. These patterns raised important questions about urban planning and environmental factors.</p>
+<p><strong>Key Takeaway</strong>: Use tools like <code>ggplot2</code> (R) or <code>matplotlib</code> (Python) to create visualizations that make your findings clear and compelling.</p>
+</section>
+<section id="quantify-your-observations" class="level3">
+<h3 class="anchored" data-anchor-id="quantify-your-observations">5. Quantify Your Observations</h3>
+<p>While visualizations are excellent for identifying patterns, summary statistics help validate those patterns. In our project, we calculated: - <strong>Average Tree Height</strong>: Across neighborhoods to compare height trends. - <strong>Height Range Distributions</strong>: To understand the proportion of tall vs.&nbsp;short trees.</p>
+<p>These numbers confirmed the visual trends and provided a solid foundation for further analysis.</p>
+<p><strong>Pro Tip</strong>: Always pair visuals with numbers. Together, they create a stronger narrative.</p>
+</section>
+<section id="ask-questions-and-iterate" class="level3">
+<h3 class="anchored" data-anchor-id="ask-questions-and-iterate">6. Ask Questions and Iterate</h3>
+<p>EDA is an iterative process. Each observation might lead to new questions. For example, when we noticed shorter trees in certain neighborhoods, we asked: - Are these differences due to environmental factors like soil quality or space constraints? - Do these neighborhoods have fewer resources for tree maintenance?</p>
+<p>These questions helped us refine our focus and consider new angles for analysis.</p>
+<p><strong>Key Takeaway</strong>: Stay curious and let your findings guide new questions, but don’t lose sight of your original objective.</p>
+</section>
+<section id="acknowledge-limitations" class="level3">
+<h3 class="anchored" data-anchor-id="acknowledge-limitations">7. Acknowledge Limitations</h3>
+<p>No dataset is perfect, and it’s important to recognize the limitations of your analysis. For our project, key limitations included:<br>
+- <strong>Missing Data</strong>: Some neighborhoods lacked complete tree height information.<br>
+- <strong>Categorical Data</strong>: Tree heights were grouped into ranges (e.g., 10–20 feet), limiting precision.</p>
+<p><strong>Pro Tip</strong>: Be transparent about what your data can and cannot tell you. This builds credibility and sets realistic expectations for your audience.</p>
+</section>
+</section>
+<section id="challenges-and-solutions-in-eda" class="level2">
+<h2 class="anchored" data-anchor-id="challenges-and-solutions-in-eda">Challenges and Solutions in EDA</h2>
+<section id="challenge-1-missing-data" class="level3">
+<h3 class="anchored" data-anchor-id="challenge-1-missing-data">Challenge 1: Missing Data</h3>
+<p><strong>Problem</strong>: Missing values can distort your findings if not handled carefully.<br>
+<strong>Solution</strong>: Use methods like imputation, exclusion, or sensitivity analysis based on your project’s needs.</p>
+</section>
+<section id="challenge-2-overinterpretation" class="level3">
+<h3 class="anchored" data-anchor-id="challenge-2-overinterpretation">Challenge 2: Overinterpretation</h3>
+<p><strong>Problem</strong>: Patterns observed in EDA aren’t always meaningful.<br>
+<strong>Solution</strong>: Treat EDA as a discovery phase and validate findings with statistical methods or domain knowledge.</p>
+</section>
+<section id="challenge-3-staying-focused" class="level3">
+<h3 class="anchored" data-anchor-id="challenge-3-staying-focused">Challenge 3: Staying Focused</h3>
+<p><strong>Problem</strong>: It’s easy to get lost in interesting but irrelevant patterns.<br>
+<strong>Solution</strong>: Keep referring back to your main question or objective.</p>
+</section>
+</section>
+<section id="final-thoughts-eda-as-a-foundation-for-success" class="level2">
+<h2 class="anchored" data-anchor-id="final-thoughts-eda-as-a-foundation-for-success">Final Thoughts: EDA as a Foundation for Success</h2>
+<p>EDA isn’t just a step in the data science workflow—it’s the foundation for everything that follows. Whether you’re exploring tree data in Vancouver or customer behaviors in e-commerce, EDA helps you understand your data, refine your questions, and make informed decisions.</p>
+<p>Aspiring data scientists, remember: Effective EDA isn’t about flashy techniques—it’s about curiosity, discipline, and attention to detail. Start your projects with a solid EDA process, and you’ll set yourself up for success in every analysis. Let Vancouver’s trees inspire you to dig deeper into your own data!</p>
 
 
 </section>
