@@ -10,7 +10,7 @@ bibliography: references.bib
 **Estimated Reading Time:** 12 minute(s)
 
 ---
-![Tree](img/tree.jpg){style="float: right; margin-left: 10px; width: 200px"}
+![Tree](img/vancouver_tree.png){style="float: right; margin-left: 10px; width: 200px"}
 If you are interested in pursuing a career in data science, Exploratory Data Analysis (EDA) is one of the most critical skills you’ll rely on in virtually every data analysis project. Think of EDA as the foundation of your analysis, it’s where you familiarize yourself with your data, uncover patterns, and set the stage for meaningful insights. 
 
 In this blog, let's dive into how to implement EDA effectively using an example from a project about [Vancouver Tree Height Geography Analysis](https://ubc-mds.github.io/vancouver-tree-height-geo-group-33/report/vancouver-tree-height-geo.html), where we explored variations in tree heights across the city’s neighborhoods. Whether you’re analyzing trees, customer behavior, or healthcare data, the lessons from this project apply universally to all aspiring data professionals.
@@ -138,7 +138,7 @@ ggplot(heatmap_data, aes(x = HEIGHT_RANGE_ID,
     theme(plot.title = element_text(hjust = 0.5, face = "bold", size = 14))    
 ```
 
-- **Advanced Mapping**: To enhance the visual appeal and provide deeper insights, we mapped both the average tree heights and tree counts across Vancouver neighborhoods using the Vancouver map dataset @van_local_area_boundary. These advanced visualizations offer a clear geographic perspective, revealing notable differences in both tree heights and counts across neighborhoods.
+- **Advanced Mapping**: To enhance the visual appeal and provide deeper insights, we mapped both the average tree heights and tree counts across Vancouver neighborhoods using the Vancouver map dataset (@van_local_area_boundary). These advanced visualizations offer a clear geographic perspective, revealing notable differences in both tree heights and counts across neighborhoods.
   
 ```{r message=FALSE, echo=FALSE, warning=FALSE}
 shapefile_path <- "data/local-area-boundary.shp"
@@ -219,7 +219,7 @@ To summarize, based on the steps we implemented in our Vancouver tree project, h
 **Problem**: The exploratory nature of EDA can lead to distraction by irrelevant but interesting patterns.  
 **Solution**: Continuously align your analysis with the primary research question or objective. Use a clear roadmap or checklist to stay on track without disregarding potential future avenues of exploration.  
 
-## At the End: EDA is the Foundation for Successful Data Analysis
+## The End: EDA is the Foundation for Successful Data Analysis
 
 Exploratory Data Analysis (EDA) forms the foundation for everything that follows in a data science workflow. Whether analyzing tree data in Vancouver or studying customer behaviors in e-commerce, EDA equips you with the tools to understand your data, refine your questions, and make informed decisions.
 
