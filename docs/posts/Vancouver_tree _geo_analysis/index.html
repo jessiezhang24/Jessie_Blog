@@ -22,7 +22,61 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
-</style>
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+/* CSS for citations */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+  margin-bottom: 0em;
+}
+.hanging-indent div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}</style>
 
 
 <script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
@@ -119,7 +173,7 @@ ul.task-list li input[type="checkbox"] {
       <h1 class="title">A Practical Guide to EDA: Analyzing Vancouver’s Tree Heights</h1>
                                 <div class="quarto-categories">
                 <div class="quarto-category">Data Science</div>
-                <div class="quarto-category">analysis</div>
+                <div class="quarto-category">Analysis</div>
               </div>
                   </div>
   </div>
@@ -156,96 +210,443 @@ ul.task-list li input[type="checkbox"] {
 
 
 
-<p>If you’re aspiring to be a data scientist or analyst, Exploratory Data Analysis (EDA) is one of the most critical steps in any project you will encounter. Think of EDA as the foundation of your analysis, it’s where you familiarize yourself with your data, uncover patterns, and set the stage for meaningful insights. Skipping this step or performing it poorly can lead to misguided conclusions and wasted efforts.</p>
-<p>In this blog, let’s dive into how to implement EDA effectively using an example from a project about <a href="https://ubc-mds.github.io/vancouver-tree-height-geo-group-33/report/vancouver-tree-height-geo.html">Vancouver Tree Height Geography Analysis</a>, where we explored variations in tree heights across the city’s neighborhoods. Whether you’re analyzing trees, customer behavior, or healthcare data, the lessons from this project apply universally to all aspiring data scientists.</p>
+<p><strong>Word Count:</strong> 1460<br>
+<strong>Estimated Reading Time:</strong> 12 minute(s)</p>
+<hr>
+<p><img src="img/tree.jpg" class="img-fluid" style="float: right; margin-left: 10px; width: 200px" alt="Tree"> If you are interested in pursuing a career in data science, Exploratory Data Analysis (EDA) is one of the most critical skills you’ll rely on in virtually every data analysis project. Think of EDA as the foundation of your analysis, it’s where you familiarize yourself with your data, uncover patterns, and set the stage for meaningful insights.</p>
+<p>In this blog, let’s dive into how to implement EDA effectively using an example from a project about <a href="https://ubc-mds.github.io/vancouver-tree-height-geo-group-33/report/vancouver-tree-height-geo.html">Vancouver Tree Height Geography Analysis</a>, where we explored variations in tree heights across the city’s neighborhoods. Whether you’re analyzing trees, customer behavior, or healthcare data, the lessons from this project apply universally to all aspiring data professionals.</p>
 <section id="what-is-eda-and-why-is-it-important" class="level2">
-<h2 class="anchored" data-anchor-id="what-is-eda-and-why-is-it-important">What Is EDA and Why Is It Important?</h2>
-<p><img src="tree.jpg" class="img-fluid" style="float: right; margin-left: 10px; width: 200px" alt="Tree"> Exploratory Data Analysis (EDA) is a critical step in any data science workflow. It’s where you familiarize yourself with your data, uncover patterns, and set the stage for meaningful insights. Skipping this step or performing it poorly can lead to misguided conclusions and wasted efforts.</p>
-<p>EDA helps you:<br>
-- <strong>Understand Your Dataset</strong>: Learn about the structure, quality, and key features of your data.<br>
-- <strong>Spot Trends and Anomalies</strong>: Identify patterns, clusters, or unexpected values that may require attention.<br>
-- <strong>Shape Your Analysis</strong>: Refine your questions and determine the most promising directions for further exploration.</p>
-<p>In our Vancouver Tree Project, EDA allowed us to explore tree height distributions across neighborhoods and informed our approach to testing whether these variations were significant.</p>
+<h2 class="anchored" data-anchor-id="what-is-eda-and-why-is-it-important">What is EDA and Why is it Important?</h2>
+<p>Exploratory Data Analysis (EDA) is an important step in any data science workflow. It’s where you explore and know important characteristics of your dataset. Skipping this step or performing it poorly can lead to misguided conclusions and wasted efforts.</p>
+<p>Specifically, EDA can help you (but not limited to):</p>
+<ul>
+<li><strong>Understand Your Dataset</strong>: Learn about the size, structure, and key features of the data. You can also identify missing or duplicate values to examine the quality of dataset.</li>
+<li><strong>Spot Trends and Anomalies</strong>: Identify distributions and patterns, clusters, or unexpected values outliers that may require extra attention.<br>
+</li>
+<li><strong>Shape Your Analysis</strong>: Discover the relationship between variables and refine your questions based on your initial analysis. Determine the most promising directions for further exploration.</li>
+</ul>
+<p><img src="img/EDA_epicycles.png" class="img-fluid" alt="EDA_Epicycles"><span class="citation" data-cites="the_art_of_data_science">Peng and Matsui (<a href="#ref-the_art_of_data_science" role="doc-biblioref">2017</a>)</span></p>
+<p>In our Vancouver Tree Project, the EDA step allowed us to explore tree height distributions across neighborhoods and informed our approach to testing whether these variations were significant. Now, let’s explore the magic of EDA step by step!</p>
+<div style="background-color:#f5f5f5; padding:10px;">
+<span style="color:red; font-weight:bold;"><strong>Important Note</strong></span>: Although EDA usually is the first step in the analysis, an effective data analysis workflow is not linear and may involve consistently exploring the data at many points of your analysis path.
+</div>
 </section>
 <section id="steps-for-effective-eda" class="level2">
 <h2 class="anchored" data-anchor-id="steps-for-effective-eda">Steps for Effective EDA</h2>
 <section id="start-with-a-clear-objective" class="level3">
 <h3 class="anchored" data-anchor-id="start-with-a-clear-objective">1. Start with a Clear Objective</h3>
-<p>Every great EDA begins with a specific question or goal. For our project, the question was: <em>Do tree heights vary across neighborhoods in Vancouver?</em> This focus ensured our analysis was targeted and relevant.</p>
-<p><strong>Pro Tip</strong>: Define your objective early and use it as a guide throughout the EDA process. This prevents you from getting sidetracked by unrelated patterns.</p>
+<p>Every great EDA begins with a specific question or goal, so you should firstly formulate your question. For exmaple, in our Vancouver Tree project, the research question was: <strong>Do tree heights vary significantly from neighborhood to neighborhood in Vancouver?</strong> This focus ensured our analysis was targeted and all the findings should be relevant.</p>
+<div style="background-color:#f5f5f5; padding:10px;">
+<span style="color:red; font-weight:bold;"><strong>Important Note</strong></span>: Define your objective early and use it as a guide throughout the EDA process. This prevents you from getting sidetracked by unrelated patterns.
+</div>
 </section>
-<section id="load-and-inspect-your-data" class="level3">
-<h3 class="anchored" data-anchor-id="load-and-inspect-your-data">2. Load and Inspect Your Data</h3>
-<p>Before analyzing anything, start by understanding the structure and quality of your dataset. For our project, the data included tree height categories, neighborhood names, and other details. Here’s what we did:<br>
-- <strong>Check Data Structure</strong>: How many rows and columns are there? What are the variable types?<br>
-- <strong>Identify Missing Values</strong>: Are there gaps in the data that need attention?<br>
-- <strong>Preview the Data</strong>: Use simple commands like <code>head()</code> or <code>summary()</code> in R or Python to get a quick snapshot.</p>
-<p>For example, we discovered inconsistent capitalization in neighborhood names, which needed to be standardized before further analysis.</p>
-<p><strong>Key Takeaway</strong>: Understanding your data early saves time and helps you spot potential issues before they become major obstacles.</p>
+<section id="load-and-read-your-data" class="level3">
+<h3 class="anchored" data-anchor-id="load-and-read-your-data">2. Load and Read Your Data</h3>
+<p>Before analyzing anything, start by understanding the structure and quality of the dataset, so that we can gain an overview of the data and identify the columns of interest.</p>
+<p>Here’s what we did for our project:</p>
+<ul>
+<li><strong>Load and Preview the Dataset</strong>: Use simple commands like <code>head()</code> in R to get a quick snapshot of the data. For our project, we observed that the dataset included various properties of each tree in Vancouver, such as its location, category, planting information, and other characteristics.</li>
+</ul>
+<p>Dataset: <span class="citation" data-cites="city_vancouver_trees">City of Vancouver Open Data Portal (<a href="#ref-city_vancouver_trees" role="doc-biblioref">2022</a>)</span></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>tree_data <span class="ot">&lt;-</span> <span class="fu">read_csv2</span>(<span class="st">"street-trees.csv"</span>)</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>tree_data <span class="sc">|&gt;</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">head</span>() <span class="sc">|&gt;</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">kable</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<table class="caption-top table table-sm table-striped small">
+<colgroup>
+<col style="width: 2%">
+<col style="width: 3%">
+<col style="width: 3%">
+<col style="width: 3%">
+<col style="width: 4%">
+<col style="width: 4%">
+<col style="width: 6%">
+<col style="width: 2%">
+<col style="width: 3%">
+<col style="width: 3%">
+<col style="width: 4%">
+<col style="width: 3%">
+<col style="width: 5%">
+<col style="width: 5%">
+<col style="width: 4%">
+<col style="width: 3%">
+<col style="width: 2%">
+<col style="width: 1%">
+<col style="width: 3%">
+<col style="width: 17%">
+<col style="width: 6%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: right;">TREE_ID</th>
+<th style="text-align: right;">CIVIC_NUMBER</th>
+<th style="text-align: left;">STD_STREET</th>
+<th style="text-align: left;">GENUS_NAME</th>
+<th style="text-align: left;">SPECIES_NAME</th>
+<th style="text-align: left;">CULTIVAR_NAME</th>
+<th style="text-align: left;">COMMON_NAME</th>
+<th style="text-align: left;">ASSIGNED</th>
+<th style="text-align: left;">ROOT_BARRIER</th>
+<th style="text-align: left;">PLANT_AREA</th>
+<th style="text-align: right;">ON_STREET_BLOCK</th>
+<th style="text-align: left;">ON_STREET</th>
+<th style="text-align: left;">NEIGHBOURHOOD_NAME</th>
+<th style="text-align: left;">STREET_SIDE_NAME</th>
+<th style="text-align: right;">HEIGHT_RANGE_ID</th>
+<th style="text-align: left;">HEIGHT_RANGE</th>
+<th style="text-align: left;">DIAMETER</th>
+<th style="text-align: left;">CURB</th>
+<th style="text-align: left;">DATE_PLANTED</th>
+<th style="text-align: left;">Geom</th>
+<th style="text-align: left;">geo_point_2d</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: right;">89177</td>
+<td style="text-align: right;">8538</td>
+<td style="text-align: left;">FRENCH ST</td>
+<td style="text-align: left;">ZELKOVA</td>
+<td style="text-align: left;">SERRATA</td>
+<td style="text-align: left;">VILLAGE GREEN</td>
+<td style="text-align: left;">VILLAGE GREEN ZELKOVA</td>
+<td style="text-align: left;">N</td>
+<td style="text-align: left;">Y</td>
+<td style="text-align: left;">7</td>
+<td style="text-align: right;">8500</td>
+<td style="text-align: left;">FRENCH ST</td>
+<td style="text-align: left;">MARPOLE</td>
+<td style="text-align: left;">EVEN</td>
+<td style="text-align: right;">2</td>
+<td style="text-align: left;">20’ - 30’</td>
+<td style="text-align: left;">10.0</td>
+<td style="text-align: left;">Y</td>
+<td style="text-align: left;">2008-02-06</td>
+<td style="text-align: left;">{“coordinates”: [-123.139089, 49.209211], “type”: “Point”}</td>
+<td style="text-align: left;">49.209211, -123.139089</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">89178</td>
+<td style="text-align: right;">3439</td>
+<td style="text-align: left;">W 27TH AV</td>
+<td style="text-align: left;">ACER</td>
+<td style="text-align: left;">PLATANOIDES</td>
+<td style="text-align: left;">PRINCETON GOLD</td>
+<td style="text-align: left;">PRINCETON GOLD MAPLE</td>
+<td style="text-align: left;">N</td>
+<td style="text-align: left;">N</td>
+<td style="text-align: left;">12</td>
+<td style="text-align: right;">3400</td>
+<td style="text-align: left;">W 27TH AV</td>
+<td style="text-align: left;">DUNBAR-SOUTHLANDS</td>
+<td style="text-align: left;">ODD</td>
+<td style="text-align: right;">2</td>
+<td style="text-align: left;">20’ - 30’</td>
+<td style="text-align: left;">11.0</td>
+<td style="text-align: left;">Y</td>
+<td style="text-align: left;">2008-02-08</td>
+<td style="text-align: left;">{“coordinates”: [-123.18093, 49.24811], “type”: “Point”}</td>
+<td style="text-align: left;">49.24811, -123.18093</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">89180</td>
+<td style="text-align: right;">1732</td>
+<td style="text-align: left;">KITCHENER ST</td>
+<td style="text-align: left;">MALUS</td>
+<td style="text-align: left;">ZUMI</td>
+<td style="text-align: left;">CALOCARPA</td>
+<td style="text-align: left;">REDBUD CRABAPPLE</td>
+<td style="text-align: left;">N</td>
+<td style="text-align: left;">N</td>
+<td style="text-align: left;">6</td>
+<td style="text-align: right;">1700</td>
+<td style="text-align: left;">KITCHENER ST</td>
+<td style="text-align: left;">GRANDVIEW-WOODLAND</td>
+<td style="text-align: left;">EVEN</td>
+<td style="text-align: right;">2</td>
+<td style="text-align: left;">20’ - 30’</td>
+<td style="text-align: left;">9.0</td>
+<td style="text-align: left;">Y</td>
+<td style="text-align: left;">1998-03-23</td>
+<td style="text-align: left;">{“coordinates”: [-123.068748, 49.272083], “type”: “Point”}</td>
+<td style="text-align: left;">49.272083, -123.068748</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">89189</td>
+<td style="text-align: right;">1765</td>
+<td style="text-align: left;">KITCHENER ST</td>
+<td style="text-align: left;">MALUS</td>
+<td style="text-align: left;">ZUMI</td>
+<td style="text-align: left;">CALOCARPA</td>
+<td style="text-align: left;">REDBUD CRABAPPLE</td>
+<td style="text-align: left;">N</td>
+<td style="text-align: left;">N</td>
+<td style="text-align: left;">6</td>
+<td style="text-align: right;">1700</td>
+<td style="text-align: left;">KITCHENER ST</td>
+<td style="text-align: left;">GRANDVIEW-WOODLAND</td>
+<td style="text-align: left;">ODD</td>
+<td style="text-align: right;">2</td>
+<td style="text-align: left;">20’ - 30’</td>
+<td style="text-align: left;">5.25</td>
+<td style="text-align: left;">Y</td>
+<td style="text-align: left;">1998-03-24</td>
+<td style="text-align: left;">{“coordinates”: [-123.068088, 49.272172], “type”: “Point”}</td>
+<td style="text-align: left;">49.272172, -123.068088</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">89190</td>
+<td style="text-align: right;">1768</td>
+<td style="text-align: left;">KITCHENER ST</td>
+<td style="text-align: left;">ACER</td>
+<td style="text-align: left;">PSEUDOPLATANUS</td>
+<td style="text-align: left;">NA</td>
+<td style="text-align: left;">SYCAMORE MAPLE</td>
+<td style="text-align: left;">N</td>
+<td style="text-align: left;">N</td>
+<td style="text-align: left;">6</td>
+<td style="text-align: right;">1700</td>
+<td style="text-align: left;">KITCHENER ST</td>
+<td style="text-align: left;">GRANDVIEW-WOODLAND</td>
+<td style="text-align: left;">EVEN</td>
+<td style="text-align: right;">4</td>
+<td style="text-align: left;">40’ - 50’</td>
+<td style="text-align: left;">12.0</td>
+<td style="text-align: left;">Y</td>
+<td style="text-align: left;">NA</td>
+<td style="text-align: left;">{“coordinates”: [-123.068009, 49.272078], “type”: “Point”}</td>
+<td style="text-align: left;">49.272078, -123.068009</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">89198</td>
+<td style="text-align: right;">1814</td>
+<td style="text-align: left;">KITCHENER ST</td>
+<td style="text-align: left;">ACER</td>
+<td style="text-align: left;">PSEUDOPLATANUS</td>
+<td style="text-align: left;">NA</td>
+<td style="text-align: left;">SYCAMORE MAPLE</td>
+<td style="text-align: left;">Y</td>
+<td style="text-align: left;">N</td>
+<td style="text-align: left;">6</td>
+<td style="text-align: right;">1800</td>
+<td style="text-align: left;">KITCHENER ST</td>
+<td style="text-align: left;">GRANDVIEW-WOODLAND</td>
+<td style="text-align: left;">EVEN</td>
+<td style="text-align: right;">4</td>
+<td style="text-align: left;">40’ - 50’</td>
+<td style="text-align: left;">11.0</td>
+<td style="text-align: left;">Y</td>
+<td style="text-align: left;">NA</td>
+<td style="text-align: left;">{“coordinates”: [-123.065987, 49.272061], “type”: “Point”}</td>
+<td style="text-align: left;">49.272061, -123.065987</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<ul>
+<li><strong>Check Data Structure</strong>: We should take a look at the size of the dataset, and also the variable types using command <code>str()</code> in R. For simplicity, we are going to only focus on the 4 columns that highly related to our research questions, which are <code>TREE_ID</code>, <code>NEIGHBOURHOOD_NAME</code>, <code>HEIGHT_RANGE_ID</code>, and <code>HEIGHT_RANGE</code>. And since there is a one-to-one correspondence between levels of <code>HEIGHT_RANGE</code> and <code>HEIGHT_RANGE_ID</code>. we can confidently use <code>HEIGHT_RANGE_ID</code> as a numeric representation for further analysis, ensuring consistency and simplicity in our approach.</li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>tree_data <span class="ot">&lt;-</span> tree_data <span class="sc">|&gt;</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">select</span>(TREE_ID, NEIGHBOURHOOD_NAME, HEIGHT_RANGE_ID, HEIGHT_RANGE)</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(tree_data)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>tibble [184,125 × 4] (S3: tbl_df/tbl/data.frame)
+ $ TREE_ID           : num [1:184125] 89177 89178 89180 89189 89190 ...
+ $ NEIGHBOURHOOD_NAME: chr [1:184125] "MARPOLE" "DUNBAR-SOUTHLANDS" "GRANDVIEW-WOODLAND" "GRANDVIEW-WOODLAND" ...
+ $ HEIGHT_RANGE_ID   : num [1:184125] 2 2 2 2 4 4 5 4 5 4 ...
+ $ HEIGHT_RANGE      : chr [1:184125] "20' - 30'" "20' - 30'" "20' - 30'" "20' - 30'" ...</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>correspondence_table <span class="ot">&lt;-</span> tree_data <span class="sc">|&gt;</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">select</span>(HEIGHT_RANGE, HEIGHT_RANGE_ID) <span class="sc">|&gt;</span>  </span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">distinct</span>() <span class="sc">|&gt;</span>                            </span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">arrange</span>(HEIGHT_RANGE_ID)             </span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a><span class="fu">kable</span>(correspondence_table)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<table class="caption-top table table-sm table-striped small">
+<thead>
+<tr class="header">
+<th style="text-align: left;">HEIGHT_RANGE</th>
+<th style="text-align: right;">HEIGHT_RANGE_ID</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">0’ - 10’</td>
+<td style="text-align: right;">0</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">10’ - 20’</td>
+<td style="text-align: right;">1</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">20’ - 30’</td>
+<td style="text-align: right;">2</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">30’ - 40’</td>
+<td style="text-align: right;">3</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">40’ - 50’</td>
+<td style="text-align: right;">4</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">50’ - 60’</td>
+<td style="text-align: right;">5</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">60’ - 70’</td>
+<td style="text-align: right;">6</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">70’ - 80’</td>
+<td style="text-align: right;">7</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">80’ - 90’</td>
+<td style="text-align: right;">8</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">90’ - 100’</td>
+<td style="text-align: right;">9</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">&gt; 100’</td>
+<td style="text-align: right;">10</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<ul>
+<li><strong>Identify Missing or Duplicate Values</strong>: To ensure data quality, we checked for gaps or duplicates that might require attention. Specifically, we examined the <code>TREE_ID</code> column, as it serves as the unique identifier for each tree. Based on our analysis, the dataset is relatively tidy, with no missing or duplicate records detected.</li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">colSums</span>(<span class="fu">is.na</span>(tree_data))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>           TREE_ID NEIGHBOURHOOD_NAME    HEIGHT_RANGE_ID       HEIGHT_RANGE 
+                 0                  0                  0                  0 </code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sum</span>(<span class="fu">duplicated</span>(tree_data<span class="sc">$</span>TREE_ID))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0</code></pre>
+</div>
+</div>
+<div style="background-color:#f5f5f5; padding:10px;">
+<span style="color:red; font-weight:bold;"><strong>Important Note</strong></span>: In the real world, many datasets are far from tidy, unlike our <code>tree_data</code>. Dirty data can easily distort analysis and lead to misleading conclusions, undermining the validity of your findings. While data cleaning might not be the most exciting part of the process, it is absolutely essential. Investing time in thoroughly cleaning your dataset ensures that your analysis is both accurate and reliable, providing a strong foundation for meaningful insights.
+</div>
 </section>
-<section id="clean-the-data" class="level3">
-<h3 class="anchored" data-anchor-id="clean-the-data">3. Clean the Data</h3>
-<p>Dirty data is the enemy of meaningful analysis. In our Vancouver project, we cleaned the data by: - <strong>Standardizing Formats</strong>: Ensuring consistent capitalization for neighborhood names to avoid grouping errors. - <strong>Handling Missing Data</strong>: Excluding neighborhoods with incomplete tree height data to maintain accuracy. - <strong>Removing Duplicates</strong>: Eliminating repeated entries to prevent bias in the analysis.</p>
-<p><strong>Pro Tip</strong>: Data cleaning might not be glamorous, but it’s critical. Invest time in this step to ensure your analysis is accurate and reliable.</p>
+<section id="use-visualizations-to-uncover-trends-and-anomalies" class="level3">
+<h3 class="anchored" data-anchor-id="use-visualizations-to-uncover-trends-and-anomalies">3. Use Visualizations to Uncover Trends and Anomalies</h3>
+<p>Visualization is a powerful tool in EDA, enabling you to uncover trends, anomalies, and relationships that may not be apparent in raw data. The choice of plot depends on the characteristics of your dataset. For example, bar plots are excellent for visualizing the counts of categorical variables, while boxplots or violin plots effectively display the distribution of continuous variables. For more advanced analysis, scatter plot matrices (or pair plots) can help you explore pairwise relationships between multiple variables, providing deeper insights into potential correlations and patterns.</p>
+<p>Specifically for our project, we used:</p>
+<ul>
+<li><strong>Bar Charts</strong>: To explore the count of tree height distributions and identify potential outliers, we observed that trees in the height range of 0–10 ft are very few. This anomaly may be due to these trees being recently planted, and thus not representative of mature trees in the dataset. To ensure more accurate analysis and meaningful insights, it may be prudent to exclude trees in this height range from further analysis.</li>
+</ul>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="index_files/figure-html/unnamed-chunk-5-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<ul>
+<li><strong>Heatmaps</strong>: Heatmaps are a powerful way to visualize spatial variations in tree height across Vancouver’s neighborhoods. From the heatmap, we observed that the most common tree height range in most neighborhoods falls between 1 and 3 units. On the other hand, taller trees (height ranges 6-10 units) are scarce and, in many cases, entirely absent, highlighting potential disparities in tree growth or planting strategies across the city.</li>
+</ul>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="index_files/figure-html/unnamed-chunk-6-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<ul>
+<li><strong>Advanced Mapping</strong>: To enhance the visual appeal and provide deeper insights, we mapped both the average tree heights and tree counts across Vancouver neighborhoods using the Vancouver map dataset <span class="citation" data-cites="van_local_area_boundary">City of Vancouver Open Data Portal (<a href="#ref-van_local_area_boundary" role="doc-biblioref">2023</a>)</span>. These advanced visualizations offer a clear geographic perspective, revealing notable differences in both tree heights and counts across neighborhoods.</li>
+</ul>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="index_files/figure-html/unnamed-chunk-7-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="index_files/figure-html/unnamed-chunk-7-2.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
 </section>
-<section id="use-visualizations-to-uncover-patterns" class="level3">
-<h3 class="anchored" data-anchor-id="use-visualizations-to-uncover-patterns">4. Use Visualizations to Uncover Patterns</h3>
-<p>Visualization is one of the most powerful tools in EDA. It allows you to see trends, anomalies, and relationships that might not be obvious in raw data. In our project, we used:<br>
-- <strong>Bar Charts</strong>: To compare tree height distributions across neighborhoods.<br>
-- <strong>Heatmaps</strong>: To visualize variations in average tree height across the city spatially.<br>
-<img src="heatmap.png" id="fig-heatmap" class="img-fluid" style="width:90.0%" alt="Heatmap of Tree Height Distribution by Neighbourhood"><br>
-- <strong>More</strong>: To further improve our plots, we could actually combine area map and heatmaps to make them more appealing.<br>
-<img src="map_by_height.png" id="fig-heatmap" class="img-fluid" style="width:90.0%" alt="Map of Tree Height Distribution by Neighbourhood"></p>
-<p>For example, we observed that neighborhoods like Downtown and Shaughnessy had taller trees, while Victoria-Fraserview and Renfrew-Collingwood were dominated by shorter ones. These patterns raised important questions about urban planning and environmental factors.</p>
-<p><strong>Key Takeaway</strong>: Use tools like <code>ggplot2</code> (R) or <code>matplotlib</code> (Python) to create visualizations that make your findings clear and compelling.</p>
-</section>
-<section id="quantify-your-observations" class="level3">
-<h3 class="anchored" data-anchor-id="quantify-your-observations">5. Quantify Your Observations</h3>
-<p>While visualizations are excellent for identifying patterns, summary statistics help validate those patterns. In our project, we calculated: - <strong>Average Tree Height</strong>: Across neighborhoods to compare height trends. - <strong>Height Range Distributions</strong>: To understand the proportion of tall vs.&nbsp;short trees.</p>
-<p>These numbers confirmed the visual trends and provided a solid foundation for further analysis.</p>
-<p><strong>Pro Tip</strong>: Always pair visuals with numbers. Together, they create a stronger narrative.</p>
-</section>
-<section id="ask-questions-and-iterate" class="level3">
-<h3 class="anchored" data-anchor-id="ask-questions-and-iterate">6. Ask Questions and Iterate</h3>
-<p>EDA is an iterative process. Each observation might lead to new questions. For example, when we noticed shorter trees in certain neighborhoods, we asked: - Are these differences due to environmental factors like soil quality or space constraints? - Do these neighborhoods have fewer resources for tree maintenance?</p>
-<p>These questions helped us refine our focus and consider new angles for analysis.</p>
-<p><strong>Key Takeaway</strong>: Stay curious and let your findings guide new questions, but don’t lose sight of your original objective.</p>
+<section id="draw-initial-conclusions-and-prove-them" class="level3">
+<h3 class="anchored" data-anchor-id="draw-initial-conclusions-and-prove-them">4. Draw Initial Conclusions and Prove Them</h3>
+<p>Every observation can spark new questions and guide deeper analysis, so we may need multiple plots to draw more reliable conclusions from EDA. However, while visually identifiable patterns provide valuable insights, validating these observations statistically is essential. In our case, although tree height patterns across neighborhoods were apparent, determining whether these differences were statistically significant required an appropriate hypothesis test. In the real world, this step ensures that decisions and strategies are based on sound evidence, minimizing the risk of misinterpretation or bias.</p>
+<div style="background-color:#F0FFFF; padding:10px;">
+<span style="color: #4682B4;"><strong>Tip</strong>: Stay curious and let your findings inspire further exploration, but always ground your conclusions in evidence and stay aligned with your original objectives.</span>
+</div>
 </section>
 <section id="acknowledge-limitations" class="level3">
-<h3 class="anchored" data-anchor-id="acknowledge-limitations">7. Acknowledge Limitations</h3>
-<p>No dataset is perfect, and it’s important to recognize the limitations of your analysis. For our project, key limitations included:<br>
-- <strong>Missing Data</strong>: Some neighborhoods lacked complete tree height information.<br>
-- <strong>Categorical Data</strong>: Tree heights were grouped into ranges (e.g., 10–20 feet), limiting precision.</p>
-<p><strong>Pro Tip</strong>: Be transparent about what your data can and cannot tell you. This builds credibility and sets realistic expectations for your audience.</p>
+<h3 class="anchored" data-anchor-id="acknowledge-limitations">5. Acknowledge Limitations</h3>
+<p>No dataset is perfect, and it is important to recognize the limitations of your analysis to ensure your audience interprets the findings accurately and understands the context.</p>
+<p>For our project, key limitations included:</p>
+<ul>
+<li><strong>Categorical Data</strong>: Tree heights were grouped into ranges (e.g., 10–20 ft), which reduced precision and prevented analysis of specific height variations within these ranges.</li>
+<li><strong>Sampling Bias</strong>: The dataset only included trees recorded by the City of Vancouver, potentially excluding trees in private properties or unregistered areas, leading to incomplete coverage.</li>
+</ul>
+<div style="background-color:#f5f5f5; padding:10px;">
+<span style="color:red; font-weight:bold;"><strong>Important Note</strong></span>: Acknowledging limitations not only builds trust with your audience but also encourages more informed decision-making.
+</div>
 </section>
 </section>
-<section id="challenges-and-solutions-in-eda" class="level2">
-<h2 class="anchored" data-anchor-id="challenges-and-solutions-in-eda">Challenges and Solutions in EDA</h2>
-<section id="challenge-1-missing-data" class="level3">
-<h3 class="anchored" data-anchor-id="challenge-1-missing-data">Challenge 1: Missing Data</h3>
-<p><strong>Problem</strong>: Missing values can distort your findings if not handled carefully.<br>
-<strong>Solution</strong>: Use methods like imputation, exclusion, or sensitivity analysis based on your project’s needs.</p>
+<section id="key-challenges-and-solutions-in-eda" class="level2">
+<h2 class="anchored" data-anchor-id="key-challenges-and-solutions-in-eda">Key Challenges and Solutions in EDA</h2>
+<p>To summarize, based on the steps we implemented in our Vancouver tree project, here are the key challenges and how to address them:</p>
+<section id="challenge-1-missing-data" class="level4">
+<h4 class="anchored" data-anchor-id="challenge-1-missing-data">Challenge 1: Missing Data</h4>
+<p><strong>Problem</strong>: Missing values can skew results or lead to biased conclusions if not addressed properly.<br>
+<strong>Solution</strong>: Employ strategies like imputation, exclusion, or sensitivity analysis tailored to the context of your data and research goals. Always document how missing data was handled to ensure transparency.</p>
 </section>
-<section id="challenge-2-overinterpretation" class="level3">
-<h3 class="anchored" data-anchor-id="challenge-2-overinterpretation">Challenge 2: Overinterpretation</h3>
-<p><strong>Problem</strong>: Patterns observed in EDA aren’t always meaningful.<br>
-<strong>Solution</strong>: Treat EDA as a discovery phase and validate findings with statistical methods or domain knowledge.</p>
+<section id="challenge-2-overinterpretation" class="level4">
+<h4 class="anchored" data-anchor-id="challenge-2-overinterpretation">Challenge 2: Overinterpretation</h4>
+<p><strong>Problem</strong>: Patterns observed during EDA may appear significant but could be random or misleading.<br>
+<strong>Solution</strong>: Approach EDA as an exploratory phase and validate insights with rigorous statistical methods or input from domain experts to avoid overinterpretation.</p>
 </section>
-<section id="challenge-3-staying-focused" class="level3">
-<h3 class="anchored" data-anchor-id="challenge-3-staying-focused">Challenge 3: Staying Focused</h3>
-<p><strong>Problem</strong>: It’s easy to get lost in interesting but irrelevant patterns.<br>
-<strong>Solution</strong>: Keep referring back to your main question or objective.</p>
+<section id="challenge-3-staying-focused" class="level4">
+<h4 class="anchored" data-anchor-id="challenge-3-staying-focused">Challenge 3: Staying Focused</h4>
+<p><strong>Problem</strong>: The exploratory nature of EDA can lead to distraction by irrelevant but interesting patterns.<br>
+<strong>Solution</strong>: Continuously align your analysis with the primary research question or objective. Use a clear roadmap or checklist to stay on track without disregarding potential future avenues of exploration.</p>
 </section>
 </section>
-<section id="final-thoughts-eda-as-a-foundation-for-success" class="level2">
-<h2 class="anchored" data-anchor-id="final-thoughts-eda-as-a-foundation-for-success">Final Thoughts: EDA as a Foundation for Success</h2>
-<p>EDA isn’t just a step in the data science workflow—it’s the foundation for everything that follows. Whether you’re exploring tree data in Vancouver or customer behaviors in e-commerce, EDA helps you understand your data, refine your questions, and make informed decisions.</p>
-<p>Aspiring data scientists, remember: Effective EDA isn’t about flashy techniques—it’s about curiosity, discipline, and attention to detail. Start your projects with a solid EDA process, and you’ll set yourself up for success in every analysis. Let Vancouver’s trees inspire you to dig deeper into your own data!</p>
+<section id="final-thoughts-eda-as-a-foundation-for-successful-data-analysis" class="level2">
+<h2 class="anchored" data-anchor-id="final-thoughts-eda-as-a-foundation-for-successful-data-analysis">Final Thoughts: EDA as a Foundation for Successful Data Analysis</h2>
+<p>Exploratory Data Analysis (EDA) forms the foundation for everything that follows in a data science workflow. Whether analyzing tree data in Vancouver or studying customer behaviors in e-commerce, EDA equips you with the tools to understand your data, refine your questions, and make informed decisions.</p>
+<p>For aspiring data scientists/analysts, mastering the EDA process is an essential first step. A strong EDA approach ensures your projects are grounded in clarity and insight, setting the stage for success in every analysis. Let the story of Vancouver’s trees inspire you to uncover patterns and dive deeper into your own datasets!</p>
 
 
+
 </section>
 
-</main> <!-- /main -->
+<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" role="doc-bibliography" id="quarto-bibliography"><h2 class="anchored quarto-appendix-heading">References</h2><div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list">
+<div id="ref-city_vancouver_trees" class="csl-entry" role="listitem">
+City of Vancouver Open Data Portal. 2022. <span>“Street Trees Dataset.”</span> <a href="https://opendata.vancouver.ca/explore/dataset/street-trees/information/">https://opendata.vancouver.ca/explore/dataset/street-trees/information/</a>.
+</div>
+<div id="ref-van_local_area_boundary" class="csl-entry" role="listitem">
+———. 2023. <span>“Local Area Boundary Dataset.”</span> <a href="https://opendata.vancouver.ca/explore/dataset/local-area-boundary/information/">https://opendata.vancouver.ca/explore/dataset/local-area-boundary/information/</a>.
+</div>
+<div id="ref-the_art_of_data_science" class="csl-entry" role="listitem">
+Peng, Roger D., and Elizabeth Matsui. 2017. <em>The Art of Data Science</em>. <a href="https://leanpub.com/artofdatascience">https://leanpub.com/artofdatascience</a>.
+</div>
+</div></section></div></main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
   const toggleBodyColorMode = (bsSheetEl) => {
